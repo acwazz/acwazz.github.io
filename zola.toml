@@ -1,0 +1,39 @@
+title = "🖋️ Emanuele Addis"
+description = "My personal website!"
+base_url = "https://emanueleaddis.it"
+default_language = "en"
+
+theme = "apollo"
+taxonomies = [{ name = "topics" }]
+
+compile_sass = false
+
+build_search_index = true
+minify_html = false
+
+
+[search]
+include_title = true
+include_description = true
+include_path = true
+include_content = true
+index_format = "elasticlunr_json"
+
+[markdown.highlighting]
+dark_theme = "ayu-dark"
+light_theme = "everforest-light"
+style = "class"
+error_on_missing_language = true
+
+[extra]
+fediverse = false
+fediverse_creator = ""
+socials = [
+    { name = "github", url = "https://github.com/acwazz", icon = "github" },
+]
+menu = [{ name = "/home", url = "/", weight = 1 }]
+theme = "toggle"
+favicon = "imgs/favicon.png"
+toc = true
+fancy_code = true
+stylesheets = ["css/overrides.css", "css/components.css"]
