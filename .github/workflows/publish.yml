@@ -5,18 +5,14 @@ on:
   workflow_dispatch:
     inputs:
       logLevel:
-        description: 'Log level'
+        description: "Log level"
         required: true
-        default: 'info'
+        default: "info"
         type: choice
         options:
-        - info
-        - warning
-        - debug
-      tags:
-        description: 'Testing'
-        required: false
-        type: boolean
+          - info
+          - warning
+          - debug
 permissions:
   contents: read
   pages: write
@@ -30,11 +26,13 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v6.0.1
-
-      - name: Build Zola + upload Pages artifact
+        with:
+          submodules: recursive
+      - name: Build site
         uses: getzola/github-pages@066755243e69f508fd1a74739fbf1a65f656c790
         with:
-          zola_version: v0.22.0
+          zola_version: v0.22.1
+          working_directory: .
 
   deploy:
     runs-on: ubuntu-latest
