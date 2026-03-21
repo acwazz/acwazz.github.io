@@ -1,22 +1,32 @@
 .unselectable {
-    -webkit-user-select: none; /* Safari */
+    -webkit-user-select: none;
+    /* Safari */
     user-select: none;
 }
 
-.hero { 
-    -webkit-user-select: none; /* Safari */
+.hero {
+    -webkit-user-select: none;
+    /* Safari */
     user-select: none;
-    text-align: center; 
-    padding: 0.5rem 0; 
+    text-align: center;
+    padding: 0.5rem 0;
+
     .title {
-        font-size: 3rem; 
-        margin-bottom: 1rem; 
+        font-size: 3rem;
+        margin-bottom: 1rem;
         font-family: var(--header-font);
         font-weight: 700;
         color: var(--primary-color);
     }
-    .subtitle { 
-        font-size: 1.25rem; 
+
+    .subtitle {
+        font-size: 1.25rem;
         margin-bottom: 1rem;
     }
+}
+
+.page-header {
+    font-family: var(--header-font);
+    font-weight: 700;
+    color: var(--primary-color);
 }

@@ -7,10 +7,11 @@ theme = "apollo"
 taxonomies = [{ name = "topics" }]
 
 compile_sass = false
+generate_feeds = true
+feed_filenames = ["atom.xml", "rss.xml"]
 
 build_search_index = true
-minify_html = false
-
+minify_html = true
 
 [search]
 include_title = true
@@ -30,10 +31,22 @@ fediverse = false
 fediverse_creator = ""
 socials = [
     { name = "github", url = "https://github.com/acwazz", icon = "github" },
+    { name = "soundcloud", url = "https://soundcloud.com/emanuele-addis", icon = "soundcloud" },
+    { name = "spotify", url = "https://open.spotify.com/intl-it/artist/32KsSdutnnbkiefiTeAeTT?si=At8nJehVSIah63-VW1-2lQ", icon = "spotify" },
+    { name = "rss", url = "/atom.xml", icon = "rss" },
 ]
-menu = [{ name = "/home", url = "/", weight = 1 }]
+menu = [
+    { name = "<home>", url = "/", weight = 1 },
+#    { name = "<blog>", url = "/blog", weight = 2 },
+#    { name = "<topics>", url = "/topics", weight = 3 },
+]
 theme = "toggle"
 favicon = "imgs/favicon.png"
 toc = true
 fancy_code = true
+use_cdn = false
 stylesheets = ["css/overrides.css", "css/components.css"]
+
+[extra.taxonomies]
+sort_by = "name"
+reverse = false
