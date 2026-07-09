@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% import "macros/macros.html" as post_macros %}
+
+{% block main_content %}
+        {{ post_macros::page_header(title="Career & Experience") }}
+
+    <div class="experience-intro">
+        <p>A chronological overview of my professional journey, technical expertise, and education.</p>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-wrapper">
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search experiences, tech, skills..." autocomplete="off">
+            <span class="search-clear" id="search-clear">&times;</span>
+        </div>
+    </div>
+
+    <main class="experience-main">
+        <div class="experience-timeline">
+            {% for page in section.pages %}
+                <div class="experience-card" 
+                     data-title="{{ page.title | lower }}"
+                     data-company="{{ page.extra.company | lower }}"
+                     data-tags="{{ page.extra.tags | join(val=',') | lower }}"
+                     data-content="{{ page.content | striptags | lower }}">
+                    
+                    <div class="card-inner">
+                        <div class="card-header">
+                            <div class="title-company-group">
+                                <h3 class="job-title">{{ page.title }}</h3>
+                                <div class="company-name">
+                                    {% if page.extra.company_url %}
+                                        <a href="{{ page.extra.company_url }}" target="_blank" rel="noopener">{{ page.extra.company }}</a>
+                                    {% else %}
+                                        {{ page.extra.company }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="date-location-group">
+                                <span class="job-duration">{{ page.extra.dates }}</span>
+                                <span class="job-location">
+                                    {% if page.extra.location | lower == "remote" %}
+                                        🏠
+                                    {% else %}
+                                        📍
+                                    {% endif %}
+                                    {{ page.extra.location }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Card Body (Expandable) -->
+                        <div class="card-body">
+                            <div class="card-details">
+                                {{ page.content | safe }}
+                            </div>
+                        </div>
+                        
+                        <!-- Toggle Details Button -->
+                        <div class="card-toggle-container">
+                            <button class="toggle-details-btn">
+                                <span class="btn-text">Show Details</span>
+                                <span class="btn-arrow">↓</span>
+                            </button>
+                        </div>
+
+                        <!-- Card Footer: Tags -->
+                        <div class="card-footer-tags">
+                            {% for tag in page.extra.tags %}
+                                <span class="experience-tag" data-raw-tag="{{ tag }}">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <!-- Interactive Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('search-input');
+            const searchClear = document.getElementById('search-clear');
+            const cards = document.querySelectorAll('.experience-card');
+            const tags = document.querySelectorAll('.experience-tag');
+            
+            let searchQuery = '';
+
+            // Handle tag click for quick search injection
+            tags.forEach(tag => {
+                tag.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const clickedTag = tag.getAttribute('data-raw-tag');
+                    searchInput.value = clickedTag;
+                    searchQuery = clickedTag.toLowerCase();
+                    searchClear.style.display = 'inline';
+                    applySearch();
+                    searchInput.focus();
+                });
+            });
+
+            // Search input
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value.trim().toLowerCase();
+                if (searchQuery.length > 0) {
+                    searchClear.style.display = 'inline';
+                } else {
+                    searchClear.style.display = 'none';
+                }
+                applySearch();
+            });
+
+            // Clear search
+            searchClear.addEventListener('click', () => {
+                searchInput.value = '';
+                searchQuery = '';
+                searchClear.style.display = 'none';
+                applySearch();
+                searchInput.focus();
+            });
+
+            function applySearch() {
+                cards.forEach(card => {
+                    const title = card.getAttribute('data-title');
+                    const company = card.getAttribute('data-company');
+                    const cardTags = card.getAttribute('data-tags');
+                    const content = card.getAttribute('data-content');
+
+                    let searchMatch = false;
+                    if (searchQuery === '') {
+                        searchMatch = true;
+                    } else {
+                        searchMatch = title.includes(searchQuery) || 
+                                      company.includes(searchQuery) || 
+                                      cardTags.includes(searchQuery) ||
+                                      content.includes(searchQuery);
+                    }
+
+                    if (searchMatch) {
+                        card.style.display = 'block';
+                        card.style.opacity = '0';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                        }, 50);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
+            // Expand/Collapse Details logic
+            const toggleButtons = document.querySelectorAll('.toggle-details-btn');
+            toggleButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const card = btn.closest('.experience-card');
+                    const body = card.querySelector('.card-body');
+                    const text = btn.querySelector('.btn-text');
+                    const arrow = btn.querySelector('.btn-arrow');
+                    
+                    if (body.classList.contains('expanded')) {
+                        body.classList.remove('expanded');
+                        text.textContent = 'Show Details';
+                        arrow.textContent = '↓';
+                        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    } else {
+                        body.classList.add('expanded');
+                        text.textContent = 'Hide Details';
+                        arrow.textContent = '↑';
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock main_content %}

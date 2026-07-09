@@ -30,3 +30,567 @@
     font-weight: 700;
     color: var(--primary-color);
 }
+
+/* Career & Experience Page Styles */
+.experience-intro {
+    margin-bottom: 2rem;
+    color: var(--text-1);
+    font-size: 1.1rem;
+}
+
+/* Search Wrapper & Container */
+.search-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 2.5rem;
+}
+
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    padding-right: 2.5rem;
+    background: var(--bg-1);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-0);
+    font-family: var(--text-font);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.search-container input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(86, 188, 111, 0.25);
+    background: var(--bg-0);
+}
+
+:root.light .search-container input:focus {
+    box-shadow: 0 0 0 3px rgba(175, 58, 3, 0.2);
+}
+
+.search-clear {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-2);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+    line-height: 1;
+    user-select: none;
+}
+
+.search-clear:hover {
+    color: var(--text-0);
+}
+
+/* Experience Cards Timeline / Grid */
+.experience-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.experience-card {
+    background: var(--bg-1);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.25s ease,
+                opacity 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.experience-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--primary-color);
+    opacity: 0.8;
+}
+
+.experience-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);
+}
+
+:root.light .experience-card:hover {
+    box-shadow: 0 10px 20px -10px rgba(0,0,0,0.1);
+}
+
+.card-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.title-company-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.job-title {
+    margin: 0;
+    font-size: 1.3rem;
+    font-family: var(--header-font);
+    font-weight: 700;
+    color: var(--text-0);
+}
+
+.company-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.company-name a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.company-name a:hover {
+    text-decoration: underline;
+}
+
+.date-location-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    gap: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .date-location-group {
+        align-items: flex-start;
+        text-align: left;
+    }
+}
+
+.job-duration {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-0);
+}
+
+.job-location {
+    font-size: 0.9rem;
+    color: var(--text-2);
+}
+
+/* Collapsible Card Body */
+.card-body {
+    max-height: 100px;
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-body::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--bg-1));
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.card-body.expanded {
+    max-height: 1200px;
+}
+
+.card-body.expanded::after {
+    opacity: 0;
+}
+
+.card-details {
+    color: var(--text-1);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.card-details ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.card-details li {
+    margin-bottom: 0.5rem;
+}
+
+/* Toggle Details Button */
+.card-toggle-container {
+    display: flex;
+    justify-content: center;
+    margin-top: -0.5rem;
+}
+
+.toggle-details-btn {
+    background: var(--bg-2);
+    border: none;
+    border-radius: 20px;
+    padding: 0.35rem 1rem;
+    color: var(--text-1);
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--text-font);
+    transition: all 0.2s ease;
+}
+
+.toggle-details-btn:hover {
+    background: var(--primary-color);
+    color: var(--bg-0) !important;
+}
+
+.toggle-details-btn .btn-arrow {
+    font-weight: 700;
+}
+
+/* Card Tags */
+.card-footer-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+.experience-tag {
+    background: var(--bg-2);
+    color: var(--text-1);
+    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.experience-tag:hover {
+    background: var(--primary-color);
+    color: var(--bg-0) !important;
+}
+
+/* Education Section */
+.education-section-header {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.section-title-secondary {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    font-family: var(--header-font);
+    margin: 0;
+}
+
+.education-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.education-card {
+    background: var(--bg-1);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.education-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--text-2);
+    opacity: 0.8;
+}
+
+.education-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--text-2);
+    box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);
+}
+
+:root.light .education-card:hover {
+    box-shadow: 0 10px 20px -10px rgba(0,0,0,0.1);
+}
+
+/* Experience Page Header & PDF Download Button */
+.experience-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.experience-header-container .page-header {
+    margin-bottom: 0 !important;
+}
+
+.download-cv-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--primary-color);
+    color: var(--bg-0) !important;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: var(--header-font);
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+.download-cv-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.15);
+    opacity: 0.95;
+}
+
+.download-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Grouped Role Styles inside Cards */
+.experience-card h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-0);
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 0.25rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.experience-card h3:first-of-type {
+    margin-top: 0;
+}
+
+.role-dates {
+    font-size: 0.85rem;
+    color: var(--text-2);
+    font-weight: 400;
+}
+
+/* Dev Section — Subsection Links */
+.dev-subsections {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+.dev-subsection-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.dev-subsection-divider::before,
+.dev-subsection-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.dev-subsection-label {
+    font-size: 0.8rem;
+    font-family: var(--header-font);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-2);
+    white-space: nowrap;
+}
+
+.dev-subsection-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.dev-subsection-btn {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background: var(--bg-1);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.dev-subsection-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--primary-color);
+    opacity: 0.8;
+}
+
+.dev-subsection-btn:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);
+}
+
+:root.light .dev-subsection-btn:hover {
+    box-shadow: 0 10px 20px -10px rgba(0,0,0,0.12);
+}
+
+.dev-subsection-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.dev-subsection-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
+}
+
+.dev-subsection-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: var(--header-font);
+    color: var(--text-0);
+}
+
+.dev-subsection-desc {
+    font-size: 0.9rem;
+    color: var(--text-2);
+}
+
+.dev-subsection-arrow {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.dev-subsection-btn:hover .dev-subsection-arrow {
+    transform: translateX(4px);
+}
+
+/* Article Page — Project Links (GitHub / Website) */
+.article-project-links {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    margin-right: 0.5rem;
+}
+
+.article-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--bg-2);
+    border: 1.5px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    font-family: var(--header-font);
+    color: var(--text-0) !important;
+    text-decoration: none !important;
+    transition: background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.article-link-btn img {
+    width: 16px;
+    height: 16px;
+    /* keep icons consistent across dark/light */
+    filter: none;
+}
+
+.article-link-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--bg-0) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.3);
+}
+
+.article-link-btn:hover img {
+    filter: brightness(0) invert(1);
+}
+
+:root.light .article-link-btn:hover {
+    box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.15);
+}

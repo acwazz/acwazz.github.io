@@ -1,4 +1,4 @@
-title = "🖋️ Emanuele Addis"
+title = "Emanuele Addis"
 description = "My personal website!"
 base_url = "https://emanueleaddis.it"
 default_language = "en"
@@ -37,6 +37,7 @@ socials = [
 ]
 menu = [
     { name = "<home>", url = "/", weight = 1 },
+    { name = "<dev>", url = "/dev", weight = 10 },
 #    { name = "<blog>", url = "/blog", weight = 2 },
 #    { name = "<topics>", url = "/topics", weight = 3 },
 ]
