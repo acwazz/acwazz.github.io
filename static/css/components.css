@@ -407,7 +407,7 @@
 }
 
 /* Grouped Role Styles inside Cards */
-.experience-card h3 {
+.card-details h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -422,7 +422,7 @@
     margin-bottom: 0.75rem;
 }
 
-.experience-card h3:first-of-type {
+.card-details h3:first-of-type {
     margin-top: 0;
 }
 
